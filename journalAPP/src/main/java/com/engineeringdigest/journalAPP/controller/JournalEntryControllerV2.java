@@ -3,6 +3,8 @@ package com.engineeringdigest.journalAPP.controller;
 import com.engineeringdigest.journalAPP.entity.JournalEntry;
 import com.engineeringdigest.journalAPP.repository.JournalEntryRepository;
 import com.engineeringdigest.journalAPP.service.JournalEntryService;
+import lombok.Getter;
+import lombok.Setter;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
