@@ -39,6 +39,7 @@ public class User {
     //we need to connect journal entry to the journalentry so a user can put data in
     // it seemlessly and we can use assosiate user class list which have all the journal entered
     //by user and i will have the feild like journal entry so the DBRef used to create ref of that
+    //6:38 -> 44 min
     @DBRef
     private List<JournalEntry> journalEntries=new ArrayList<>();
 }
