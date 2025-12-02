@@ -1,12 +1,19 @@
 package com.engineeringdigest.journalAPP.entity;
 
 import lombok.Data;
+import lombok.NonNull;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Document//documents tell that this is mapped to the db like row, col
+@Document(collation = "users")
+//documents tell that this is mapped to the db like row, col
 //@Getter
 //@Setter
 //@NoArgsConstructor
@@ -17,43 +24,21 @@ import java.time.LocalDateTime;
 // or we can just use data annotation
 @Data
 public class User {
+    @Id
     private ObjectId id;
-    private String title;
-    private String content;
-    private LocalDateTime date;
 
+    //make userName unique
+    @Indexed(unique = true)
+    @NonNull
+    private String userName;
+    //not null is provided by lambok when anotation processor values assign kar raha hoga
+    // to wo not null check kar lega and exception through ho jayega
+    @NonNull
+    private String password;
 
-    // this is now replaced by Lombok
-//    public LocalDateTime getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(LocalDateTime date) {
-//        this.date = date;
-//    }
-//
-//    @Id//this anotation tells ki there is a key id
-//    public ObjectId getId() {
-//        return id;
-//    }
-//
-//    public void setId(ObjectId  id) {
-//        this.id = id;
-//    }
-//
-//    public String getTitle() {
-//        return title;
-//    }
-//
-//    public void setTitle(String title) {
-//        this.title = title;
-//    }
-//
-//    public String getContent() {
-//        return content;
-//    }
-//
-//    public void setContent(String content) {
-//        this.content = content;
-//    }
+    //we need to connect journal entry to the journalentry so a user can put data in
+    // it seemlessly and we can use assosiate user class list which have all the journal entered
+    //by user and i will have the feild like journal entry so the DBRef used to create ref of that
+    @DBRef
+    private List<JournalEntry> journalEntries=new ArrayList<>();
 }

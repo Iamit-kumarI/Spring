@@ -20,6 +20,7 @@ import java.util.Date;
 @Data
 public class JournalEntry {
     private ObjectId id;
+    @NonNull
     private String title;
     private String content;
     private LocalDateTime date;
