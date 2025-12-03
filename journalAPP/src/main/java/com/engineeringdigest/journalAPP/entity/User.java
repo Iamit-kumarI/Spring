@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@Document(collation = "users")
+@Document(collation = "en")
 //documents tell that this is mapped to the db like row, col
 //@Getter
 //@Setter
