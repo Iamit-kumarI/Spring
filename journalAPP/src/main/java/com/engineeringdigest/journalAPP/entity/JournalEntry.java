@@ -26,8 +26,8 @@ public class JournalEntry {
     private String title;
     private String content;
     private LocalDateTime date;
-    @DBRef
-    private User user;
+//    @DBRef
+//    private User user;
 
     // this is now replaced by Lombok
 //    public LocalDateTime getDate() {

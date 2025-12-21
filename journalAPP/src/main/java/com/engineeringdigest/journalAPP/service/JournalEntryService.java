@@ -21,12 +21,13 @@ public class JournalEntryService {
     private UserService userService;
     public void saveEntry(JournalEntry journalEntry, String userName){
        User user=userService.findByUserName(userName);
-       if(user==null){
-           throw new RuntimeException("User not found");
-       }
-       journalEntry.setUser(user);
        journalEntry.setDate(LocalDateTime.now());
-       journalEntryRepository.save(journalEntry);
+       JournalEntry saved=journalEntryRepository.save(journalEntry);
+       user.getJournalEntries().add(saved);
+       userService.saveEntry(user);
+    }
+    public void saveEntry(JournalEntry journalEntry){
+        journalEntryRepository.save(journalEntry);
     }
     public List<JournalEntry> getAll(){
         return journalEntryRepository.findAll();
@@ -35,7 +36,9 @@ public class JournalEntryService {
         return journalEntryRepository.findById(id);
     }
     public void deleteById(ObjectId id, String userName){
-        
+        User user=userService.findByUserName(userName);
+        user.getJournalEntries().removeIf(x->x.getId().equals(id));
+        userService.saveEntry(user);
         journalEntryRepository.deleteById(id);
     }
 }
