@@ -20,15 +20,13 @@ public class JournalEntryService {
     @Autowired
     private UserService userService;
     public void saveEntry(JournalEntry journalEntry, String userName){
-       try{
-           User user=userService.findByUserName(userName);
-           journalEntry.setDate(LocalDateTime.now());
-           JournalEntry saved=journalEntryRepository.save(journalEntry);
-           user.getJournalEntries().add(saved);
-           userService.saveEntry(user);
-       }catch (Exception e){
-           log.error("Exception hai bro ",e);
+       User user=userService.findByUserName(userName);
+       if(user==null){
+           throw new RuntimeException("User not found");
        }
+       journalEntry.setUser(user);
+       journalEntry.setDate(LocalDateTime.now());
+       journalEntryRepository.save(journalEntry);
     }
     public List<JournalEntry> getAll(){
         return journalEntryRepository.findAll();
@@ -36,7 +34,8 @@ public class JournalEntryService {
     public Optional<JournalEntry> findById(ObjectId id){
         return journalEntryRepository.findById(id);
     }
-    public void deleteById(ObjectId id){
+    public void deleteById(ObjectId id, String userName){
+        
         journalEntryRepository.deleteById(id);
     }
 }

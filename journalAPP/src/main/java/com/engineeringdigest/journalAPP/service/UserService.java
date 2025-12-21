@@ -17,7 +17,7 @@ import java.util.Optional;
 @Component
 public class UserService {
     @Autowired
-    private static UserRepository userRepository;
+    private UserRepository userRepository;
     public void saveEntry(User user){
            userRepository.save(user);
     }
@@ -30,7 +30,7 @@ public class UserService {
     public void deleteById(ObjectId id){
         userRepository.deleteById(id);
     }
-    public static User findByUserName(String userName){
+    public User findByUserName(String userName){
         return userRepository.findByUserName(userName);
     }
 }
