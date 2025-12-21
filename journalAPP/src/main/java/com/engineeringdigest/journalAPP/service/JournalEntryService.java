@@ -1,13 +1,13 @@
 package com.engineeringdigest.journalAPP.service;
 
 import com.engineeringdigest.journalAPP.entity.JournalEntry;
+import com.engineeringdigest.journalAPP.entity.User;
 import com.engineeringdigest.journalAPP.repository.JournalEntryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -16,10 +16,14 @@ import java.util.Optional;
 public class JournalEntryService {
     @Autowired
     private JournalEntryRepository journalEntryRepository;
-    public void saveEntry(JournalEntry journalEntry){
+
+    @Autowired
+    private UserService userService;
+    public void saveEntry(JournalEntry journalEntry, String userName){
        try{
+           User user=userService.findByUserName(userName);
            journalEntry.setDate(LocalDateTime.now());
-           journalEntryRepository.save(journalEntry);
+           JournalEntry saved=journalEntryRepository.save(journalEntry);
        }catch (Exception e){
            log.error("Exception hai bro ",e);
        }
