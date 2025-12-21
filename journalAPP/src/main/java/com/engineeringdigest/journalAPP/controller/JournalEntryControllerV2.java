@@ -3,6 +3,7 @@ package com.engineeringdigest.journalAPP.controller;
 import com.engineeringdigest.journalAPP.entity.JournalEntry;
 import com.engineeringdigest.journalAPP.repository.JournalEntryRepository;
 import com.engineeringdigest.journalAPP.service.JournalEntryService;
+import com.engineeringdigest.journalAPP.service.UserService;
 import lombok.Getter;
 import lombok.Setter;
 import org.bson.types.ObjectId;
@@ -23,8 +24,12 @@ public class JournalEntryControllerV2 {
     @Autowired
     private JournalEntryService journalEntryService;
 
+    @Autowired
+    private UserService userService;//connecting journal
+
     @GetMapping({"{userName}"})
     public ResponseEntity<?> getAllJournalEnteriesOfUser(@PathVariable String userName){
+        
         List<JournalEntry> all = journalEntryService.getAll();
         if(all!=null&&!all.isEmpty()){
             return new ResponseEntity<>(all,HttpStatus.OK);
