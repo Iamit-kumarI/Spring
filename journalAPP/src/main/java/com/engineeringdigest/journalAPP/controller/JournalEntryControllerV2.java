@@ -1,6 +1,7 @@
 package com.engineeringdigest.journalAPP.controller;
 
 import com.engineeringdigest.journalAPP.entity.JournalEntry;
+import com.engineeringdigest.journalAPP.entity.User;
 import com.engineeringdigest.journalAPP.repository.JournalEntryRepository;
 import com.engineeringdigest.journalAPP.service.JournalEntryService;
 import com.engineeringdigest.journalAPP.service.UserService;
@@ -29,18 +30,19 @@ public class JournalEntryControllerV2 {
 
     @GetMapping({"{userName}"})
     public ResponseEntity<?> getAllJournalEnteriesOfUser(@PathVariable String userName){
-        
-        List<JournalEntry> all = journalEntryService.getAll();
+        User user=userService.findByUserName(userName);
+        List<JournalEntry> all =user.getJournalEntries();
         if(all!=null&&!all.isEmpty()){
             return new ResponseEntity<>(all,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping
-    public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry myEntry) {
+    @PostMapping("{userName}")
+    public ResponseEntity<JournalEntry> createEntry(@RequestBody JournalEntry myEntry,@PathVariable String userName) {
         try {
 //            myEntry.setDate(LocalDateTime.now());
+            User user=userService.findByUserName(userName);
             journalEntryService.saveEntry(myEntry);
             return new ResponseEntity<>(myEntry, HttpStatus.CREATED);
         }catch (Exception e){
