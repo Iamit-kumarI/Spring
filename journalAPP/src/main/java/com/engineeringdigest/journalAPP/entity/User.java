@@ -44,4 +44,6 @@ public class User {
     //6:38 -> 44 min
     @DBRef
     private List<JournalEntry> journalEntries=new ArrayList<>();
+    //since a user cdan have multiple roles so just add all the role in the list
+    private List<String>roles;
 }
