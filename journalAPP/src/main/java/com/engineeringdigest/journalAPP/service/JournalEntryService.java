@@ -29,7 +29,7 @@ public class JournalEntryService {
            JournalEntry saved=journalEntryRepository.save(journalEntry);
            user.getJournalEntries().add(saved);
 //           user.setUserName(null); we have done this just to check exception
-           userService.saveEntry(user);
+           userService.saveNewEntry(user);
        }catch (Exception e){
            System.out.println(e);
            throw new RuntimeException("An error occured while saving the db: ",e);
@@ -44,10 +44,18 @@ public class JournalEntryService {
     public Optional<JournalEntry> findById(ObjectId id){
         return journalEntryRepository.findById(id);
     }
+    @Transactional
     public void deleteById(ObjectId id, String userName){
-        User user=userService.findByUserName(userName);
-        user.getJournalEntries().removeIf(x->x.getId().equals(id));
-        userService.saveEntry(user);
-        journalEntryRepository.deleteById(id);
+        try {
+            User user=userService.findByUserName(userName);
+            boolean removed= user.getJournalEntries().removeIf(x -> x.getId().equals(id));
+            if(removed){
+                userService.saveUser(user);
+                journalEntryRepository.deleteById(id);
+            }
+        }catch (Exception e){
+            System.out.println(e);
+            throw new RuntimeException("An error occured while saving the entry "+e);
+        }
     }
 }
