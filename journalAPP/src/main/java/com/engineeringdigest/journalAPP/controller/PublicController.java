@@ -17,7 +17,7 @@ public class PublicController {
     private UserService userService;
     @PostMapping("/create-user")
     public void createUser(@RequestBody User user){
-        userService.saveNewEntry(user);
+        userService.saveNewUser(user);
     }
 
 }

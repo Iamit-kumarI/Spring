@@ -29,7 +29,7 @@ public class JournalEntryService {
            JournalEntry saved=journalEntryRepository.save(journalEntry);
            user.getJournalEntries().add(saved);
 //           user.setUserName(null); we have done this just to check exception
-           userService.saveNewEntry(user);
+           userService.saveNewUser(user);
        }catch (Exception e){
            System.out.println(e);
            throw new RuntimeException("An error occured while saving the db: ",e);
