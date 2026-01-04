@@ -1,7 +1,6 @@
-#spring.data.mongodb.uri:mongodb+srv://amitkumaramitkumar15351_db_user:TIArXoh3U1g0ZiDw@cluster0.onl7nf7.mongodb.net/?appName=Cluster0
-#spring.data.mongodb.database=journaldb
-#spring.data.mongodb.auto-index-creation=true
-#in ymal we don't need to write things again and agian like spring.data.mongodb we are doing
+# in production we won't have this application.yaml to run this so the way to run this
+#with jar is
+#   .\mvnw clean package -D spring.profiles.active=prod
 spring:
   data:
     mongodb:
