@@ -20,6 +20,8 @@ public class UserDetailserviceImplTest{
     @Autowired
     private UserDetailserviceImpl userDetailservice;
 
+//    @Mock then in this case use injectsmocks and plush do setup initialization of mock
+    //to prevent null
     @MockitoBean
     private UserRepository userRepository;
 
