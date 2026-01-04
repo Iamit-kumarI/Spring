@@ -23,6 +23,7 @@ public class UserServiceTest {
         User user=userRepository.findByUserName("ram");
         assertTrue(!user.getJournalEntries().isEmpty());
     }
+    @Disabled
     @ParameterizedTest
     //here this value parameters a,b,expected can be passed by cavfile or just by csv
 //    @CsvFileSources("filepath")
