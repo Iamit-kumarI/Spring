@@ -15,4 +15,4 @@
 spring:
   config:
     activate:
-      on-profile: dev, prod
+      on-profile: dev
