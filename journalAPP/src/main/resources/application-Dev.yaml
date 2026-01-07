@@ -12,3 +12,20 @@ server:
   port: 8080
   servlet:
     context-path: /journal
+
+logging:
+  level:
+    net:
+      engineeringdigest:
+        journalAPP: DEBUG
+
+#logging:
+#  level:
+#    root: ERROR //now other than error like info wagera prinlt won't happen
+
+#ogging:
+#  level:
+#    net:
+#      engineeringdigest:
+#        journalAPP:
+#          UserService: OFF //we have just off the logs from this userService class (we user the package the package name)

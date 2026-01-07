@@ -1,0 +1,28 @@
+<configuration>
+<!--    Appender and logger configuration-->
+    <appender name="myConsoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <appender name="myFileAppender" class="ch.qos.logback.core.FileAppender">
+        <file>
+            journalApp.log
+<!--            or we can give file path here anywhere ther our log file will be created-->
+<!--            roller user to create new file every after time afer size and history deletion after a specific file nos-->
+        </file>
+        <encoder>
+            <pattern>
+                %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="myConsoleAppender"/>
+        <appender-ref ref="myFileAppender"/>
+    </root>
+</configuration>

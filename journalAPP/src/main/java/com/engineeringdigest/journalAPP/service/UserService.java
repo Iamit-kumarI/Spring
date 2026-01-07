@@ -4,6 +4,8 @@ import com.engineeringdigest.journalAPP.entity.User;
 import com.engineeringdigest.journalAPP.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,7 +20,11 @@ import java.util.Optional;
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+
+//    private static final Logger logger= LoggerFactory.getLogger(JournalEntryService.class);
+
     private static final PasswordEncoder passwordEncoder=new BCryptPasswordEncoder();
+
     public boolean saveNewUser(User user){
         try{
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -26,6 +32,7 @@ public class UserService {
             userRepository.save(user);
             return true;
         }catch (Exception e){
+            log.error("Error Occured {}",user.getUserName(),e);
             return false;
         }
     }
