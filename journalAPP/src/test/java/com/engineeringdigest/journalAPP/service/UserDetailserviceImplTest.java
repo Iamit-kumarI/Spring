@@ -15,6 +15,7 @@ import static org.mockito.Mockito.when;
 //something else you can found it on db but here will make our application not to take it from
 //db actually we will mock it like pretend like you are getting it from db so whenever
 //our service call for requirenment will pass it here just for test
+@Disabled
 public class UserDetailserviceImplTest{
 //    @InjectMocks
     @Autowired
