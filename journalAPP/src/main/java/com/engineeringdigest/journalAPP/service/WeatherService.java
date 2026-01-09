@@ -3,6 +3,7 @@ package com.engineeringdigest.journalAPP.service;
 import com.engineeringdigest.journalAPP.api.response.WeatherResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,9 @@ public class WeatherService {
 //            "\"userName\":\"vipul\",\n"+
 //            "\"password\":\"admin123\",\n"+
 //            "}";
-//    HttpEntity<String>httpEntity=new HttpEntity<>(requestBody);
+//    HttpHeaders httpHeaders=new HttpHeaders();
+//    httpHeaders.set("key":"value");
+//    HttpEntity<String>httpEntity=new HttpEntity<>(requestBody,httpHeaders);
 //    ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.POST, requestBody, WeatherResponse.class);
 //        return response.getBody();
 }
