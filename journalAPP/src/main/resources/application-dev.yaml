@@ -29,3 +29,15 @@ logging:
 #      engineeringdigest:
 #        journalAPP:
 #          UserService: OFF //we have just off the logs from this userService class (we user the package the package name)
+
+weather:
+  api:
+    key: fe5979be365fb0d9aeaf88be95d67dc5
+
+
+
+
+
+
+
+

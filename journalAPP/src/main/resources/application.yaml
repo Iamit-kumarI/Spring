@@ -13,6 +13,5 @@
 #  servlet:
 #    context-path: /journal
 spring:
-  config:
-    activate:
-      on-profile: Dev
+  profiles:
+    active: dev
