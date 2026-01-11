@@ -17,13 +17,14 @@ public class AppCache {
         WEATHER_API;
     }
 
-    public Map<String,String> appCache=new HashMap<>();
+    public Map<String,String> appCache;
 
     @Autowired
     private ConfigJournalAppRepository configJournalAppRepository;
 
     @PostConstruct
     public void init(){
+        appCache=new HashMap<>();//this supports even anything changes it will reload it from dp again in next time when it is used
         List<ConfigJournalAppEntity>all=configJournalAppRepository.findAll();
         for(ConfigJournalAppEntity configJournalAppEntity:all){
             appCache.put(configJournalAppEntity.getKey(),configJournalAppEntity.getValue());
