@@ -19,9 +19,7 @@ target/
 *.iml
 *.ipr
 
-#journalAPP/src/main/resources/application.properties
-journalAPP\src\main\resources\t.yaml
-.yaml
+*yaml
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
