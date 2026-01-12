@@ -23,11 +23,11 @@ public class UserDetailserviceImplTest{
 
 //    @Mock then in this case use injectsmocks and plush do setup initialization of mock
     //to prevent null
-    @MockitoBean
+//    @MockitoBean
     private UserRepository userRepository;
 
-    @Disabled
-    @Test
+//    @Disabled
+//    @Test
     void loadUserByUsernameTest(){
 //        when(userRepository.findByUserName("ram"));//we can trick this for that we have to make our seprate test method which i haven't did
         //engineering digest Lec 25 5:00

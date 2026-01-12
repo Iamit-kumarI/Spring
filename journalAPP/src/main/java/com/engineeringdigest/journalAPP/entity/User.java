@@ -1,8 +1,6 @@
 package com.engineeringdigest.journalAPP.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -25,6 +23,8 @@ import java.util.List;
 // or we can just use data annotation
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class User {
     @Id
     private ObjectId id;
@@ -35,6 +35,8 @@ public class User {
     private String userName;
     //not null is provided by lambok when anotation processor values assign kar raha hoga
     // to wo not null check kar lega and exception through ho jayega
+    private String email;
+    private boolean sentimentAnalysis;
     @NonNull
     private String password;
 
