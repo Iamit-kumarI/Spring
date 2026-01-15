@@ -21,10 +21,22 @@ public class WeatherService {
     private AppCache appCache;
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private RedisService redisService;
+
     public WeatherResponse getWeather(String city){
-        String finalAPI=appCache.appCache.get(AppCache.keys.WEATHER_API.toString()).replace(PlaceHolders.CITY,city).replace(PlaceHolders.API_KEYS,apiKey);
-        ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
-        return response.getBody();
+        WeatherResponse weatherResponse = redisService.get("weather_of : " + city, WeatherResponse.class);
+        //now check if this data is already in cache then return from there don't call api again
+        if(weatherResponse!=null)return weatherResponse;
+        else{
+            String finalAPI=appCache.appCache.get(AppCache.keys.WEATHER_API.toString()).replace(PlaceHolders.CITY,city).replace(PlaceHolders.API_KEYS,apiKey);
+            ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
+            //since we hit the api for the first time so we need to store this data to our redis cache
+            WeatherResponse body = response.getBody();
+            if(body!=null)redisService.set("weather_of : "+city,body,300L);//saving  data in cache for other responses
+            return body;
+        }
     }
     //doing postcall suppose my api requires some daya
 //    String requestBody="{\n"+
