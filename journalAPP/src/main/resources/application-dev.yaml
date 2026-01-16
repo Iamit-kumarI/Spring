@@ -4,8 +4,11 @@
 #in ymal we don't need to write things again and agian like spring.data.mongodb we are doing
 spring:
   redis:
-    host: localhost
-    port: 6379 //we can do this with redis cloud //uri practice this in project
+#    host: localhost
+#    port: 6379 //we can do this with redis cloud //uri practice this in project
+  host: redis-19456.c305.ap-south-1-1.ec2.cloud.redislabs.com
+  port: 19456
+  password: MEmPvHb0pPQxws9jl79jftnq6bGfo8Yw
   data:
     mongodb:
       uri: mongodb+srv://amitkumaramitkumar15351_db_user:TIArXoh3U1g0ZiDw@cluster0.onl7nf7.mongodb.net/?appName=Cluster0
@@ -22,6 +25,36 @@ spring:
           auth: true
           starttls:
             enable: true
+  kafka:
+    bootstrap-servers: pkc-l7pr2.ap-south-1.aws.confluent.cloud:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.JsonSerializer
+    consumer:
+      group-id: weekly-sentiment-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.JsonSerializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: net.engineeringdigest.journalApp.model
+    properties:
+      sasl:
+        mechanism: PLAIN
+        jaas:
+          config: "org.apache.kafka.common.security.plain.PlainLoginModule required username='NT5FSB5FWJQ2ZRDV' password='cflt5+6iBgAsmVcxM8R21tDCo0YIiugFScj4Mg0C5RouTX/IiHuWb/3kjGgYs5OQ';"
+      security:
+        protocol: SASL_SSL
+      session:
+        timeout:
+          ms: 45000
+
+
+
+
+  client:
+    id: ccloud-springboot-client-72a36256-0ac9-4a5e-b4c5-84adca80bada
 server:
   port: 8080
   servlet:
